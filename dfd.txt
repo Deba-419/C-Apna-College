@@ -1,0 +1,246 @@
+                     +---------------------------------+
+                     |       University Appointment     |
+                     |           System (UAS)           |
+                     +---------------------------------+
+                                  | 1
+                                  |
+                   +------------------------------+
+                   |          External Entity 1   | 
+                   |         (Patient/User)       |
+                   +------------------------------+
+                                  | 2
+                                  |
+               +-----------------------------------------+
+               |                 User Interface           |
+               +-----------------------------------------+
+                                  | 3
+                +-----------------+   +-----------------+
+                |                 |   |                 |
+                |       Admin     |   |       User      |
+                |                 |   |                 |
+                +-----------------+   +-----------------+
+                    | 4     | 5         | 6       | 7
+                    |       |           |         |
+    +---------------+       |           |         +---------------+
+    |                       |           |                         |
++-------+          +-------------+  +------------+         +-------------+
+|Doctor |          | Appointment |  |   Profile  |         | Appointment |
+|  List |          |   Booking   |  | Management |         |   History   |
++-------+          +-------------+  +------------+         +-------------+
+    | 8               | 9    | 10         | 11                    | 12
+    |                 |      |            |                      |
++--------+       +-------------+  +----------------+      +-------------+
+| Patient|       |Appointment  |  | Doctor-Patient |      |Appointment  |
+| Profile|       |Verification|  |    Live Chat    |      | Approval    |
++--------+       +-------------+  +----------------+      +-------------+
+
+Processes:
+1. Login/Registration
+2. View doctor categories
+3. Search for a doctor
+4. Admin login/registration
+5. Add new doctor
+6. Book an appointment as a patient
+7. View my appointment history
+8. View list of doctors
+9. Verify patient appointment request
+10. Manage doctor profiles
+11. Conduct doctor-patient live chat
+12. Approve patient appointment request
+
+Data Stores:
+1. User profile
+2. Doctor profile
+3. Appointment request
+4. Approved appointment
+5. Patient profile
+
+External Entities:
+1. Patient/User
+
+Data Flows:
+1. Patient/User login credentials
+2. Doctor categories and details
+3. Search criteria for doctor
+4. Admin login credentials
+5. New doctor profile details
+6.
+
+
+
+
+
+      +--------+       +--------+
+      | Users  |       |Doctors |
+      +--------+       +--------+
+      |userID  |       |docID   |
+      |name    |       |name    |
+      |email   |       |specialty|
+      |password|       |rating  |
+      +--------+       +--------+
+           |             |
+           | is a        | treats
+           |             |
+      +--------+       +--------+
+      |Patients|       |Appoint-|
+      +--------+       |ments  |
+      |patID   |       +--------+
+      |name    |       |appID   |
+      |email   |       |docID   |
+      |password|       |patID   |
+      +--------+       |date    |
+           |            |time    |
+           | books      |status  |
+           |            +--------+
+      +--------+            |
+      |Appoint-|            |
+      |ment    |            |
+      +--------+            |
+      |appID   |            |
+      |docID   |            |
+      |patID   |            |
+      |date    |            |
+      |time    |            |
+      |status  |            |
+      +--------+            |
+                            |
+                       +--------+
+                       |Chat    |
+                       +--------+
+                       |chatID  |
+                       |docID   |
+                       |patID   |
+                       |message|
+                       |time    |
+                       +--------+
+
+
+
+
+
+
+
+                                      +-------------------+
+                                      |   Home Page       |
+                                      +-------------------+
+                                               |
+                                               |
+                                               |
+                                               |
+                                               |
+                                               |
+                                               v
+                  +------------------------+--------+------------------------+
+                  |            Book a Doctor Appointment                       |
+                  +------------------------+--------+------------------------+
+                                               |
+                                               |
+                                               |
+                                               |
+                                               |
+                                               |
+                                               v
+               +------------------------+---------------+------------------------+
+               |       Select Doctor                      |         Search Doctor                 |
+               +------------------------+---------------+------------------------+
+                                              |                                            |
+                                              |                                            |
+                                              v                                            v
+               +------------------------+---------------+------------------------+
+               |       Doctor Details                     |         Doctor List                      |
+               +------------------------+---------------+------------------------+
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 v
+                                                      +-------------------+
+                                                      |   Verify Booking   |
+                                                      +-------------------+
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 |
+                                                                 v
+                                                      +-------------------+
+                                                      |   Appointment Confirmed  |
+                                                      +-------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+   +---------+    +-----------+    +-----------+
+   |  Home   | -> | Categories| -> |Doctor List|
+   +---------+    +-----------+    +-----------+
+       |              |                 |
+       |       +------------+     +-----------+
+       |       |  Add       |  <- |Search and |
+       |       |  Patient   |     |Book Doctor|
+       |       +------------+     +-----------+
+       |              |                 |
+       |       +------------+     +-----------+
+       |       |Top 10 Docs |  <- |Doc Details|
+       |       +------------+     +-----------+
+       |              |                 |
+       |       +------------+     +--------------+
+       |       |  User     | -> |Appointment   |
+       |       |  Login    |    |Verification  |
+       |       | /Register|    |and Approval  |
+       |       +------------+     +--------------+
+       |              |                 |
+       |       +--------------+   +-------------+
+       |       | Show My      | <-|Live Chat    |
+       |       | Appointments |   |Doctor-Patient|
+       |       +--------------+   |Communication|
+       |                           +-------------+
+       v
++---------+
+|   Exit  |
++---------+
+
+
+
+This flow chart illustrates the different components of the University doctor appointment system and how they are interconnected. Users start on the Home page, which leads them to the different doctor categories. From there, they can either search and book a doctor or view the list of top 10 doctors. They can also add a patient and view doctor details.
+
+Once a user books an appointment, the system verifies and approves it. The user can also chat with the doctor using the Live Chat feature. Users can log in, register, and view their appointments in the system. Finally, users can exit the system when they're finished.
+
+I hope this flow chart helps you visualize the different aspects of your project! Let me know if you have any questions or if there's anything else I can help you with.
+
+
+Users (userID, name, email, password)
+    PK: userID
+    
+Patients (patID, name, email, password)
+    PK: patID
+    FK: userID (from Users table)
+    
+Doctors (docID, name, specialty, rating, email, password)
+    PK: docID
+    FK: userID (from Users table)
+    
+Appointments (appID, docID, patID, date, time, status)
+    PK: appID
+    FK: docID (from Doctors table)
+    FK: patID (from Patients table)
+    
+Chats (chatID, docID, patID, message, time)
+    PK: chatID
+    FK: docID (from Doctors table)
+    FK: patID (from Patients table)
+
+This model includes the five main entities in your project and their attributes. Users table contains the common attributes between Patients and Doctors tables. Each appointment in the Appointments table is associated with a specific patient and a specific doctor. The Chats table stores the communication between patients and doctors.
+
+Note that this is just a rough draft and may not include all the necessary attributes and relationships for your project. Please review it and let me know if you have any additional requirements or modifications.
+
